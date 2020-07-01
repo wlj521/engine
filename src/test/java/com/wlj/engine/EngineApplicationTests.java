@@ -141,4 +141,15 @@ class EngineApplicationTests {
         System.out.println(AviatorEvaluator.execute("a || b || c", env));
         System.out.println(AviatorEvaluator.execute("a && b && c", env));
     }
+
+    @Test
+    void testCache() {
+        String expression = "a && b && c";
+        Expression exp = AviatorEvaluator.getInstance().compile("test", expression, true);
+        Map<String, Object> env = new HashMap<>(16);
+        env.put("a", true);
+        env.put("b", false);
+        env.put("c", true);
+        System.out.println(exp.execute(env));
+    }
 }
