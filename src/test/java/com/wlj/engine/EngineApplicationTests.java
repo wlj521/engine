@@ -2,6 +2,8 @@ package com.wlj.engine;
 
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.Expression;
+import com.googlecode.aviator.runtime.type.AviatorDouble;
+import com.googlecode.aviator.runtime.type.AviatorLong;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -151,5 +153,13 @@ class EngineApplicationTests {
         env.put("b", false);
         env.put("c", true);
         System.out.println(exp.execute(env));
+    }
+
+    @Test
+    void testWoe() {
+            String exp = "r_u1_E6_02_01_u1_fql_f1 = double(r_u1_E6_02_01_u1_fql_f1);if(r_u1_E6_02_01_u1_fql_f1 < 1){'-0.45130885495927964'}elsif(1<=r_u1_E6_02_01_u1_fql_f1){'0.13112435081095022'}";
+        Map<String, Object> env = new HashMap<>(16);
+        env.put("r_u1_E6_02_01_u1_fql_f1", 1);
+        System.out.println(AviatorEvaluator.execute(exp, env));
     }
 }
